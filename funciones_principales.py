@@ -51,9 +51,6 @@ def registrar_producto():
     
             
                          
-
-
-
 def mostrar_productos():
     conexion = conectar()
     cursor = conexion.cursor()
@@ -70,13 +67,22 @@ def mostrar_productos():
         match opcion:
             #Informacion completa (todas las columnas)
             case "1":
-                cursor.execute("""
-                    SELECT *
-                    FROM registroProductos
-                    ORDER BY nombre_producto
-                    """)
-                productos = cursor.fetchall()
-                return productos
+                lista = sql.obtener_productos()
+                if len(lista) == 0:
+                        print("No hay productos registrados.")
+                else:
+                    print("-- PRODUCTOS --")
+                
+                    for indice in range(len(lista)):
+                        producto = lista[indice]
+                
+                        print(f"ID del producto: {producto[0]}.")
+                        print(f"Nombre: {producto[1]}")
+                        print(f"Descripcion: {producto[2]}")
+                        print(f"Categoria: {producto[3]}")
+                        print(f"Cantidad: {producto[4]}")
+                        print(f"Precio: {producto[5]}")
+                        print("\n")
                             
             #Informacion esencial (nombre, cantidad y precio)   
             case "2":
