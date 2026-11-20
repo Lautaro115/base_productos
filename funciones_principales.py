@@ -49,11 +49,8 @@ def registrar_producto():
 
     sql.cargar_producto(nombre_producto, cantidad, descripcion, precio, categoria)
     
-            
-                         
-def mostrar_productos():
-    conexion = conectar()
-    cursor = conexion.cursor()
+                                     
+def mostrar_productos():    
 
     while True:    
         print("Seleccione como desea visualizar los productos:")
@@ -71,33 +68,38 @@ def mostrar_productos():
                 if len(lista) == 0:
                         print("No hay productos registrados.")
                 else:
-                    print("-- PRODUCTOS --")
+                    print("***TODOS LOS PRODUCTOS***")
                 
                     for indice in range(len(lista)):
                         producto = lista[indice]
                 
                         print(f"ID del producto: {producto[0]}.")
                         print(f"Nombre: {producto[1]}")
-                        print(f"Descripcion: {producto[2]}")
-                        print(f"Categoria: {producto[3]}")
-                        print(f"Cantidad: {producto[4]}")
-                        print(f"Precio: {producto[5]}")
+                        print(f"Cantidad: {producto[2]}")
+                        print(f"Descripcion: {producto[3]}")
+                        print(f"Precio: {producto[4]}")
+                        print(f"Categoria: {producto[5]}")
                         print("\n")
                             
             #Informacion esencial (nombre, cantidad y precio)   
             case "2":
-                cursor.execute("""
-                    SELECT nombre_producto, cantidad, precio
-                    FROM registroProductos
-                    ORDER BY nombre_producto
-                    """)
-                productos = cursor.fetchall()
-                return productos
+                lista_esencial = sql.obtener_productos_esencial()
+                if len(lista_esencial) == 0:
+                        print("No hay productos registrados.")
+                else:
+                    print("***INFORMACION ESENCIAL DE PRODUCTOS***")
+                
+                    for indice in range(len(lista_esencial)):
+                        producto = lista_esencial[indice]
+                                        
+                        print(f"Nombre: {producto[0]}")
+                        print(f"Cantidad: {producto[1]}")
+                        print(f"Precio: {producto[2]}")
+                        print("\n")
 
             case "3":
                 break
                 
-
                          
 #Eliminar producto por id
 
@@ -158,3 +160,37 @@ def eliminar_producto():
             print(error)
     finally:
         conexion.close()    
+
+
+def buscar_productos_por_id():
+    try:
+        id = int(input("Ingrese el ID del producto: "))
+        producto = sql.obtener_producto_por_id(id)
+        
+        if producto:
+           visualizar_productos([producto])
+           return producto
+        else:
+            print("No se ha encontrado ningun producto.")
+            return None
+    except ValueError:
+        print("Error: el ID debe ser un numero entero.")
+
+
+#Funcion sin menu para utilizarse con busqueda por ID
+def visualizar_productos(lista):
+    if len(lista) == 0:
+        print("No hay productos registrados.")
+    else:
+        print("***RESULTADO DE BUSQUEDA***")
+
+        for indice in range(len(lista)):
+            producto = lista[indice]
+
+            print(f"ID: {producto[0]}")
+            print(f"Nombre: {producto[1]}")
+            print(f"Cantidad: {producto[2]}")
+            print(f"Descripcion: {producto[3]}")
+            print(f"Precio: {producto[4]}")
+            print(f"Categoria: {producto[5]}")
+            print("\n")

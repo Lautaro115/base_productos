@@ -27,7 +27,7 @@ def obtener_productos():
         conexion = conectar()
         cursor = conexion.cursor()
         
-        cursor.execute("SELECT * from productos")
+        cursor.execute("SELECT * from registroProductos")
         return cursor.fetchall()
     except Exception as error:
         print(f"Error al obtener los productos: {error}")
@@ -41,10 +41,24 @@ def obtener_productos_esencial():
         conexion = conectar()
         cursor = conexion.cursor()
         
-        cursor.execute("SELECT nombre_producto, cantidad, precio from productos")
+        cursor.execute("SELECT nombre_producto, cantidad, precio from registroProductos")
         return cursor.fetchall()
     except Exception as error:
         print(f"Error al obtener los productos: {error}")
         return []
+    finally:
+        conexion.close()
+
+
+def obtener_producto_por_id(id):
+    try:
+        conexion = conectar()
+        cursor = conexion.cursor()
+        
+        cursor.execute("SELECT * FROM registroProductos WHERE id = ?",(id,))
+        return cursor.fetchone()
+    except Exception as error:
+        print(f"Se ha producido el siguiente error: {error}")
+        return None
     finally:
         conexion.close()
