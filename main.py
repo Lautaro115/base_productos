@@ -10,7 +10,9 @@ while True:
     print("3. Buscar producto por ID")
     print("4. Modificar producto")
     print("5. Eliminar producto")
-    print("6. Salir del sistema")
+    print("6. Reporte de stock bajo")
+    print("7. Eliminar todos los datos")
+    print("8. Salir del sistema")
 
     opcion = input("Seleccione una opción: ").strip()
 
@@ -29,11 +31,24 @@ while True:
      
         #Modificar producto
         case "4":
-            pass
+            fc.actualizar_producto_por_id()
             
         #Eliminar producto                 
         case "5":
             fc.eliminar_producto()
+
+        #Reporte stock
+        case "6":
+            fc.reporte_stock()
+
+        #Eliminar todos los datos
+        case "7":
+            fc.eliminar_datos_tabla()
+
+        #Salir del sistema
+        case "8":
+            print("Saliendo del sistema...")
+            break        
             
         #Caso error        
         case _:
