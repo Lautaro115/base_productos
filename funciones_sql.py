@@ -197,7 +197,7 @@ def vaciar_tabla():
         conexion = conectar()
         cursor = conexion.cursor()
         
-        cursor.execute("DELETE * FROM registroProductos")                           
+        cursor.execute("DELETE FROM registroProductos")                           
                     
         conexion.commit()
         return cursor.rowcount > 0

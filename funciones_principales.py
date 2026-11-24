@@ -4,6 +4,7 @@ from conexion import conectar
 
 #Agregar informacion
 def registrar_producto():
+    print("***AGREGAR PRODUCTOS***")
     
         
     # Ingresar nombre    
@@ -50,8 +51,8 @@ def registrar_producto():
     sql.cargar_producto(nombre_producto, cantidad, descripcion, precio, categoria)   
                                      
 def mostrar_productos():    
-
-    while True:    
+    while True:  
+        print("***VISUALIZAR PRODUCTOS***")          
         print("Seleccione como desea visualizar los productos:")
         print("1. Informacion completa")
         print("2. Informacion esencial")
@@ -65,7 +66,9 @@ def mostrar_productos():
             case "1":
                 lista = sql.obtener_productos()
                 if len(lista) == 0:
-                        print("No hay productos registrados.")
+                    print("No hay productos registrados.")
+                    break
+            
                 else:
                     print("***TODOS LOS PRODUCTOS***")
                 
@@ -79,12 +82,15 @@ def mostrar_productos():
                         print(f"Precio: {producto[4]}")
                         print(f"Categoria: {producto[5]}")
                         print("\n")
+                    break
                             
             #Informacion esencial (nombre, cantidad y precio)   
             case "2":
                 lista_esencial = sql.obtener_productos_esencial()
                 if len(lista_esencial) == 0:
-                        print("No hay productos registrados.")
+                    print("No hay productos registrados.")
+                    break
+            
                 else:
                     print("***INFORMACION ESENCIAL DE PRODUCTOS***")
                 
@@ -95,11 +101,13 @@ def mostrar_productos():
                         print(f"Cantidad: {producto[1]}")
                         print(f"Precio: {producto[2]}")
                         print("\n")
+                    break
 
             case "3":
                 break
                                 
 def buscar_productos_por_id():
+    print("***BUSCAR PRODUCTO POR ID***")
     try:
         id = int(input("Ingrese el ID del producto: "))
         producto = sql.obtener_producto_por_id(id)
@@ -132,6 +140,7 @@ def visualizar_productos(lista):
             print("\n")
 
 def actualizar_producto_por_id():
+    print("***ACTUALIZAR INFORMACION DE PRODUCTOS***")
     producto = buscar_productos_por_id() 
     
     if producto:
@@ -141,6 +150,7 @@ def actualizar_producto_por_id():
         print("3. Actualizar descripcion")
         print("4. Actualizar precio")
         print("5. Actualizar categoria")
+        print("6. Volver al menu principal")
         
         opcion = input("Seleccione la opcion deseada: ")
         
@@ -196,7 +206,7 @@ def actualizar_producto_por_id():
                 sql.actualizar_precio(producto[0],precio)
                 print("El precio del producto ha sido actualizado")
 
-            case "3":
+            case "5":
                 # actualizar categoria
                 categoria = input("Ingrese la nueva categoria del producto: ").lower().strip()
                 while categoria == "":
@@ -206,8 +216,13 @@ def actualizar_producto_por_id():
                 sql.actualizar_categoria(producto[0],categoria)
                 print("La categoria del producto ha sido actualizada")
 
+            case _:
+                print("Volviendo al menu principal")
+                
+                
+
 def eliminar_producto():
-    #Eliminar producto
+    print("***ELIMINAR PRODUCTOS***")    
     try:
         id_producto = int(input("Ingrese el id del producto que desea eliminar: ")) 
         
@@ -236,6 +251,7 @@ def eliminar_producto():
        print(f"Ha ocurrido un error: {error}.")
 
 def reporte_stock():
+    print("***REPORTE DE PRODUCTOS SEGUN LIMITE DE STOCK***")
     #Comprobacion del limite
     while True:
         try:

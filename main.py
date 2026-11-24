@@ -6,7 +6,7 @@ crear_tabla()
 while True:    
     print("SISTEMA DE GESTIÓN DE PRODUCTOS -Ver 0.9")
     print("1. Agregar producto")
-    print("2. Mostrar producto")
+    print("2. Mostrar productos")
     print("3. Buscar producto por ID")
     print("4. Modificar producto")
     print("5. Eliminar producto")
@@ -41,7 +41,7 @@ while True:
         case "6":
             fc.reporte_stock()
 
-        #Eliminar todos los datos
+        #Eliminar todos los datos (usar con precaucion)
         case "7":
             fc.eliminar_datos_tabla()
 
