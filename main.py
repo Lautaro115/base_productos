@@ -3,8 +3,8 @@ from conexion import crear_tabla
 
 crear_tabla()
 
-while True:    
-    print("SISTEMA DE GESTIÓN DE PRODUCTOS -Ver 0.9")
+while True:  
+    print("\nSISTEMA DE GESTIÓN DE PRODUCTOS -Ver 0.9.9")
     print("1. Agregar producto")
     print("2. Mostrar productos")
     print("3. Buscar producto por ID")
@@ -12,7 +12,7 @@ while True:
     print("5. Eliminar producto")
     print("6. Reporte de stock bajo")
     print("7. Eliminar todos los datos")
-    print("8. Salir del sistema")
+    print("8. Salir del sistema\n")
 
     opcion = input("Seleccione una opción: ").strip()
 

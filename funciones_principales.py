@@ -51,14 +51,15 @@ def registrar_producto():
     sql.cargar_producto(nombre_producto, cantidad, descripcion, precio, categoria)   
                                      
 def mostrar_productos():    
-    while True:  
-        print("***VISUALIZAR PRODUCTOS***")          
+    while True:        
+        print("***VISUALIZAR PRODUCTOS***")
+        print("\n")          
         print("Seleccione como desea visualizar los productos:")
         print("1. Informacion completa")
         print("2. Informacion esencial")
         print("3. Volver al menu principal")
         
-
+        print("\n")
         opcion = input("Seleccione una opción: ").strip()
 
         match opcion:
@@ -71,6 +72,7 @@ def mostrar_productos():
             
                 else:
                     print("***TODOS LOS PRODUCTOS***")
+                    print("\n")
                 
                     for indice in range(len(lista)):
                         producto = lista[indice]
@@ -80,8 +82,7 @@ def mostrar_productos():
                         print(f"Cantidad: {producto[2]}")
                         print(f"Descripcion: {producto[3]}")
                         print(f"Precio: {producto[4]}")
-                        print(f"Categoria: {producto[5]}")
-                        print("\n")
+                        print(f"Categoria: {producto[5]}\n")
                     break
                             
             #Informacion esencial (nombre, cantidad y precio)   
@@ -93,20 +94,21 @@ def mostrar_productos():
             
                 else:
                     print("***INFORMACION ESENCIAL DE PRODUCTOS***")
+                    print("\n")
                 
                     for indice in range(len(lista_esencial)):
                         producto = lista_esencial[indice]
                                         
                         print(f"Nombre: {producto[0]}")
                         print(f"Cantidad: {producto[1]}")
-                        print(f"Precio: {producto[2]}")
-                        print("\n")
+                        print(f"Precio: {producto[2]}\n")
                     break
 
             case "3":
                 break
                                 
 def buscar_productos_por_id():
+    print("\n")
     print("***BUSCAR PRODUCTO POR ID***")
     try:
         id = int(input("Ingrese el ID del producto: "))
@@ -126,6 +128,7 @@ def visualizar_productos(lista):
     if len(lista) == 0:
         print("No hay productos registrados.")
     else:
+        print("\n")
         print("***RESULTADO DE BUSQUEDA***")
 
         for indice in range(len(lista)):
@@ -136,14 +139,15 @@ def visualizar_productos(lista):
             print(f"Cantidad: {producto[2]}")
             print(f"Descripcion: {producto[3]}")
             print(f"Precio: {producto[4]}")
-            print(f"Categoria: {producto[5]}")
-            print("\n")
+            print(f"Categoria: {producto[5]}\n")
 
 def actualizar_producto_por_id():
+    print("\n")
     print("***ACTUALIZAR INFORMACION DE PRODUCTOS***")
     producto = buscar_productos_por_id() 
     
     if producto:
+        print("\n")
         print("Seleccione lo que desee actualizar:")
         print("1. Actualizar nombre")
         print("2. Actualizar stock")
@@ -218,16 +222,16 @@ def actualizar_producto_por_id():
 
             case _:
                 print("Volviendo al menu principal")
-                
-                
-
+                                
 def eliminar_producto():
+    print("\n")
     print("***ELIMINAR PRODUCTOS***")    
     try:
+        print("\n")
         id_producto = int(input("Ingrese el id del producto que desea eliminar: ")) 
         
         if id_producto <= 0:
-            print("Error: el ID debe ser numero entero positivo") 
+            print("Error: El ID debe ser numero entero positivo") 
             return
         
         producto = sql.obtener_producto_por_id(id_producto)
@@ -245,16 +249,20 @@ def eliminar_producto():
         if sql.eliminar_producto_por_id(id_producto):
             print(f"Se ha eliminado: {producto[1]} correctamente.")
         else:
-            print("No se pudo eliminar el producto")
+            print("No se pudo eliminar el producto.")
 
+    except ValueError:
+        print("Error: El numero debe ser entero.")
     except Exception as error:
        print(f"Ha ocurrido un error: {error}.")
 
 def reporte_stock():
+    print("\n")
     print("***REPORTE DE PRODUCTOS SEGUN LIMITE DE STOCK***")
     #Comprobacion del limite
     while True:
         try:
+            print("\n")
             limite = int(input("Ingrese el limite de cantidad: "))
             if limite < 0:
                 print("El limite no puede ser negativo.")
@@ -262,7 +270,7 @@ def reporte_stock():
             
             break
         except ValueError:
-            print("Error: el numero debe ser entero.")
+            print("Error: El numero debe ser entero.")
         
     productos = sql.obtener_stock_bajo(limite)
     
@@ -274,6 +282,7 @@ def reporte_stock():
 
 def eliminar_datos_tabla():
     try:
+        print("\n")
         print("***¡ATENCION!***")
         print("Esta a punto de eliminar todos los datos de la tabla.")
         decision_eliminar = input("¿Esta seguro de que desea proceder? (s/n)").strip().lower()
