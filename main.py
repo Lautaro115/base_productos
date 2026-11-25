@@ -7,7 +7,7 @@ while True:
     print("\nSISTEMA DE GESTIÓN DE PRODUCTOS -Ver 0.9.9")
     print("1. Agregar producto")
     print("2. Mostrar productos")
-    print("3. Buscar producto por ID")
+    print("3. Buscar producto")
     print("4. Modificar producto")
     print("5. Eliminar producto")
     print("6. Reporte de stock bajo")
@@ -25,9 +25,9 @@ while True:
         case "2":            
             fc.mostrar_productos()
 
-        #Buscar producto
+        #Buscar producto por id, nombre o categoria
         case "3":
-            fc.buscar_productos_por_id()
+            fc.buscar_producto()
      
         #Modificar producto
         case "4":

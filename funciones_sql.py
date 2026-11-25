@@ -46,19 +46,6 @@ def obtener_productos_esencial():
     finally:
         conexion.close()
 
-def obtener_producto_por_id(id):
-    try:
-        conexion = conectar()
-        cursor = conexion.cursor()
-        
-        cursor.execute("SELECT * FROM registroProductos WHERE id = ?",(id,))
-        return cursor.fetchone()
-    except Exception as error:
-        print(f"Se ha producido el siguiente error: {error}")
-        return None
-    finally:
-        conexion.close()
-
 def actualizar_nombre(id_producto,nombre_nuevo):
     try:
         conexion = conectar()
@@ -193,6 +180,7 @@ def obtener_stock_bajo(limite):
         conexion.close()
 
 def vaciar_tabla():
+
     try:
         conexion = conectar()
         cursor = conexion.cursor()
@@ -203,5 +191,45 @@ def vaciar_tabla():
         return cursor.rowcount > 0
     except Exception as error:
         print(f"Error al vaciar la tabla: {error}")
+    finally:
+        conexion.close()
+
+def obtener_producto_por_nombre(nombre):
+    try:
+        conexion = conectar()
+        cursor = conexion.cursor()
+        
+        nombre = f"%{nombre}%"
+        cursor.execute("SELECT * FROM registroProductos WHERE nombre_producto LIKE ?",(nombre,))
+        return cursor.fetchall()
+    except Exception as error:
+        print(f"Se ha producido el siguiente error: {error}")
+        return None
+    finally:
+        conexion.close()
+
+def obtener_producto_por_categoria(categoria):
+    try:
+        conexion = conectar()
+        cursor = conexion.cursor()
+        
+        cursor.execute("SELECT * FROM registroProductos WHERE categoria = ?",(categoria,))
+        return cursor.fetchall()
+    except Exception as error:
+        print(f"Se ha producido el siguiente error: {error}")
+        return None
+    finally:
+        conexion.close()
+
+def obtener_producto_por_id(id):
+    try:
+        conexion = conectar()
+        cursor = conexion.cursor()
+        
+        cursor.execute("SELECT * FROM registroProductos WHERE id = ?",(id,))
+        return cursor.fetchone()
+    except Exception as error:
+        print(f"Se ha producido el siguiente error: {error}")
+        return None
     finally:
         conexion.close()

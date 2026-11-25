@@ -49,7 +49,8 @@ def registrar_producto():
         categoria = input("Ingrese la categoria del producto: ").lower().strip()
 
     sql.cargar_producto(nombre_producto, cantidad, descripcion, precio, categoria)   
-                                     
+
+#Funcion con menu integrado para mostrar informacion de dos formas diferentes                                     
 def mostrar_productos():    
     while True:        
         print("***VISUALIZAR PRODUCTOS***")
@@ -107,23 +108,7 @@ def mostrar_productos():
             case "3":
                 break
                                 
-def buscar_productos_por_id():
-    print("\n")
-    print("***BUSCAR PRODUCTO POR ID***")
-    try:
-        id = int(input("Ingrese el ID del producto: "))
-        producto = sql.obtener_producto_por_id(id)
-        
-        if producto:
-           visualizar_productos([producto])
-           return producto
-        else:
-            print("No se ha encontrado ningun producto.")
-            return None
-    except ValueError:
-        print("Error: el ID debe ser un numero entero.")
-
-#Funcion sin menu para utilizarse con busqueda por ID
+#Funcion sin menu para utilizarse con busqueda por ID, nombre y categoria
 def visualizar_productos(lista):
     if len(lista) == 0:
         print("No hay productos registrados.")
@@ -299,6 +284,79 @@ def eliminar_datos_tabla():
                 ("No se ha hecho ninguna modificacion en la tabla.")
     except Exception as error:
         print(f"Ha ocurrido un error al eliminar los datos: {error}")
-       
+
+#Forma parte de buscar_producto()
+def buscar_productos_por_nombre():
+    print("\n")
+    print("***BUSCAR PRODUCTO POR NOMBRE***")
+    try:
+        nombre = input("Ingrese el nombre del producto: ").lower().strip()
+        producto = sql.obtener_producto_por_nombre(nombre)
+        
+        if producto:
+           visualizar_productos(producto)
+           return producto
+        else:
+            print("No se ha encontrado ningun producto.")
+            return None
+    except Exception as error:
+        print(f"Ha ocurrido el siguiente error: {error}")
+
+#Forma parte de buscar_producto()
+def buscar_productos_por_categoria():
+    print("\n")
+    print("***BUSCAR PRODUCTO POR CATEGORIA***")
+    try:
+        categoria = input("Ingrese la categoria del producto: ").lower().strip()
+        producto = sql.obtener_producto_por_categoria(categoria)
+        
+        if producto:
+           visualizar_productos(producto)
+           return producto
+        else:
+            print("No se ha encontrado ningun producto.")
+            return None
+    except Exception as error:
+        print(f"Ha ocurrido el siguiente error: {error}")
+
+#Forma parte de buscar_producto()
+def buscar_productos_por_id():
+    print("\n")
+    print("***BUSCAR PRODUCTO POR ID***")
+    try:
+        id = int(input("Ingrese el ID del producto: "))
+        producto = sql.obtener_producto_por_id(id)
+        
+        if producto:
+           visualizar_productos([producto])
+           return producto
+        else:
+            print("No se ha encontrado ningun producto.")
+            return None
+    except ValueError:
+        print("Error: el ID debe ser un numero entero.")
+
+def buscar_producto():
+    try:
+        print("Seleccione como desea buscar el producto:")
+        print("1. Buscar por ID")
+        print("2. Buscar por nombre")
+        print("3. Buscar por categoria")
+        print("4. Volver al menu principal\n")
+
+        busqueda = input("Seleccione una opcion: ")
+
+        match busqueda:
+
+            case "1":
+                buscar_productos_por_id()
+            case "2":
+                buscar_productos_por_nombre()
+            case "3":
+                buscar_productos_por_categoria()
+            case _:
+                print("Volviendo al menu principal")
 
 
+    except Exception as error:
+        print(f"Ha ocurrido un error: {error}")
