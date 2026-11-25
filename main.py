@@ -4,7 +4,7 @@ from conexion import crear_tabla
 crear_tabla()
 
 while True:  
-    print("\nSISTEMA DE GESTIÓN DE PRODUCTOS -Ver 0.9.9")
+    print("\nSISTEMA DE GESTIÓN DE PRODUCTOS -Ver 1.0")
     print("1. Agregar producto")
     print("2. Mostrar productos")
     print("3. Buscar producto")
