@@ -336,6 +336,7 @@ def buscar_productos_por_id():
     except ValueError:
         print("Error: el ID debe ser un numero entero.")
 
+#Funcion con menu para buscar producto por id, nombre y categoria
 def buscar_producto():
     try:
         print("Seleccione como desea buscar el producto:")
